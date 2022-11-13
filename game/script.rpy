@@ -4,7 +4,7 @@
 # name of the character.
 
 define e = Character("Eileen")
-
+define test = Character('test', color="#da7a7a")
 
 # The game starts here.
 
@@ -20,11 +20,7 @@ label start:
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
 
-    show andrew happy
-
-    define Andrew = Character('Andrew', color="#da7a7a")
-
-    Andrew "My name will show up as Andrew in game"
+    test "My name will show up as test in game"
 
     # This ends the game.
 
