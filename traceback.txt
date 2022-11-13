@@ -1,0 +1,28 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/script.rpy", line 33, in script
+    e Andrew "My name will show up as Andrew in game"
+Exception: Say has image attributes ('Andrew',), but there's no image tag associated with the speaking character.
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/script.rpy", line 33, in script
+    e Andrew "My name will show up as Andrew in game"
+  File "/Volumes/renpy-8.0.3-sdk/renpy-8.0.3-sdk/renpy/ast.py", line 921, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "/Volumes/renpy-8.0.3-sdk/renpy-8.0.3-sdk/renpy/exports.py", line 1373, in say
+    who(what, *args, **kwargs)
+  File "/Volumes/renpy-8.0.3-sdk/renpy-8.0.3-sdk/renpy/character.py", line 1206, in __call__
+    old_attr_state = self.handle_say_attributes(False, interact)
+  File "/Volumes/renpy-8.0.3-sdk/renpy-8.0.3-sdk/renpy/character.py", line 1030, in handle_say_attributes
+    if self.resolve_say_attributes(predicting, attrs):
+  File "/Volumes/renpy-8.0.3-sdk/renpy-8.0.3-sdk/renpy/character.py", line 956, in resolve_say_attributes
+    raise Exception("Say has image attributes %r, but there's no image tag associated with the speaking character." % (attrs,))
+Exception: Say has image attributes ('Andrew',), but there's no image tag associated with the speaking character.
+
+macOS-10.16-x86_64-i386-64bit x86_64
+Ren'Py 8.0.3.22090809
+Missing Mayor 1.0
+Sun Nov 13 14:30:22 2022
