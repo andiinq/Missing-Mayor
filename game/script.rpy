@@ -3,8 +3,10 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define e = Character("Eileen")
-define test = Character('test', color="#da7a7a")
+define Jeffery = Character("Jeffery Adams")
+define Margaret = Character('Margaret Adams', color="#da7a7a")
+define Cole = Character('Cole (You)', color="#da7a7a")
+define Luis = Character('Sherrif Luis', color="#da7a7a")
 
 # The game starts here.
 
@@ -20,7 +22,7 @@ label start:
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
 
-    test "My name will show up as test in game"
+    Margaret "My name will show up as test in game"
 
     # This ends the game.
 
