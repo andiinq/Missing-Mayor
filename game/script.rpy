@@ -41,6 +41,7 @@ label start:
     cole "{i}What's going on?{/i} Everyone's runnin' around like animals!"
 
     show cole bored at left
+    with move
     show amy stressed
 
     amy "\"HELP! HELP! THE MAYOR'S GONE MISSING!\""
@@ -64,7 +65,7 @@ label start:
     cole "hi"
 
     return
-    
+
 label .offerHelp:
 
     show cole happy at left
