@@ -50,8 +50,22 @@ label start:
 
     show amy indifferent
 
-
     amy "*panting* \"Mayor Adams walks around town every day and asks everyone how they're doin', it just ain't like him to go missing.\""
+
+    menu:
+        "What should I say?"
+
+        "Offer to Help":
+            call .offerHelp
+
+        "Tell her to stop whining.":
+            jump .stopWhining
+
+    cole "hi"
+
+    return
+    
+label .offerHelp:
 
     show cole happy at left
 
@@ -61,7 +75,14 @@ label start:
 
     amy "\"Oh you will! Oh me oh my! Thank the heavens for sendin' you down to me!\""
 
+    return
 
-    # This ends the game.
+label .stopWhining:
+
+    show cole angry at left
+    cole "\"Would you quit your whinin'? I'm startin' to get real sick of it!\""
+
+    show amy stressed
+    amy "\"You're a horrible man there, Mister Cole.\""
 
     return
