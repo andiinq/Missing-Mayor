@@ -19,6 +19,8 @@ label start:
 
     scene bg blacksmith
 
+    n "Just on the outside of town lives and works a lonely blacksmith, Cole."
+
     show cole happy
 
     cole "{i}Phew.{/i} Another day working the iron."
@@ -85,5 +87,15 @@ label .stopWhining:
 
     show amy stressed
     amy "\"You're a horrible man there, Mister Cole.\""
+
+    hide amy stressed
+    hide cole angry at left
+
+    scene bg blacksmith
+    with fade
+
+    show cole happy
+
+    n "Cole decides to go back to his blacksmithing shop and ignore the ruckus going on within the town."
 
     return
