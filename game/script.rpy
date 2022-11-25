@@ -10,6 +10,8 @@ define luis = Character('Sherrif Luis', color="#ff9f3b")
 define alex = Character('Alex', color= "b2ff87")
 define amy = Character('Amy', color= "b58adf")
 define n = Character('Narrator', color="#999999")
+define morg = Character('Morgan', color= "bcd5ed")
+
 
 # The game starts here.
 
