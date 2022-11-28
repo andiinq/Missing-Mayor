@@ -13,7 +13,7 @@ define n = Character('Narrator', color="#999999")
 define morg = Character('Morgan', color= "bcd5ed")
 define jes = Character("Jesse", color="c49f35")
 
-#default $reputation = 0
+default reputation = 0
 
 # The game starts here.
 
@@ -94,6 +94,7 @@ label .offerHelp:
 
 label .stopWhining:
 
+    $ reputation = reputation - 1
     show cole angry at left
     cole "\"Would you quit your whinin'? I'm startin' to get real sick of it!\""
 
@@ -103,6 +104,12 @@ label .stopWhining:
     hide amy stressed
     hide cole angry at left
 
+
+
+    return
+
+label .badReputation:
+
     scene bg blacksmith
     with fade
 
@@ -110,16 +117,18 @@ label .stopWhining:
 
     n "\"Cole decides to go back to his blacksmithing shop and ignore the ruckus going on within the town.\""
 
-    return
-
+    cole ""
 label .meetMargaret:
 
     scene bg margaret house
     with fade
 
     show mar at left
+    with easeinleft
     show amy stressed
+    with moveinleft
     show cole bored at right
+    with moveinleft
 
     amy "\"Oh Margaret! I heard o’ the bad news!\""
 
@@ -141,13 +150,167 @@ label .meetMargaret:
 
 label .meetAlexAndMorgan:
 
+    cole "\"Alex and Morgan just moved into town, they are close to me. I’ll talk to them.\""
+    mar "\"Okay, I trust you now. I'll stay here with Amy.\""
+
+
+    scene bg house
+    with fade
+
+    n "Cole walks to Alex and Morgan's house."
+
+    show cole bored at left
+    with moveinleft
+    show test
+    with easeinright
+    show test2 at right
+    with easeinright
+
+    cole "\"Howdy, have you seen Mayor Jeffery around here?\""
+
+    alex "\"Not that I’ve seen ‘mate.\""
+
+    morg "\"Hmm, actually I think I saw him last night walking into some random farm and that’s about it. I still need to learn more about this area, haha.\""
+
+    cole "\"Farm? Where?\""
+
+    morg "\"Not sure actually, but the farm near the tavern.\""
+
+    cole "\"Amy’s house? Her house is a farm.\""
+
+    morg "\"Oh hm, yeah I think so.\""
+
+    alex "\"Is there something serious going on bud?\""
+
+    cole "\"Well, ya see, don’t panic but the mayor gone missing…\""
+
+    morg "{i}gasping{\i} \"Uh- what now?!\""
+
+    cole "\"SSHHHH!!!\""
+
+    cole "\"I’m trying to find him, but you guys don’t tell anyone about this. Just be on the lookout and tell me if you see him. I’m going to go check on Amy.\""
+
+    alex "\"Alrighty now, we’ll tell you if we catch him.\""
+
+
+
+    scene bg margaret house
+    with fade
+
+    show mar at left
+    with easeinleft
+    show cole bored
+    with moveinright
+
+    cole "\"We’ll go check up on Amy, Alex and Morgan said Mayor Jefferey walked into her farm or some farm near her house last night.\""
+
+    mar "\"Okay\" {i}sniffs{\i}"
+
+    hide mar at left
+    with moveoutleft
+    hide cole bored
+    with moveoutleft
+
+    scene bg amy farm
+    with fade
+    show mar
+    with moveinright
+    show cole angry at right
+    with moveinright
+
+    cole "\"Her house is always so quiet for some’ reason now.\""
+
+    mar "\"Oh, don’t mind her now dear, she is just like that.\""
+
+    n "{i}Cole loudly knocks twice on Amy's door.{\i}"
+
+    n "{i}Several loud noises arise from inside the farmhouse{\i}"
+    show amy stressed at left
+    with easeinleft
+
+    amy "\"Oh- oh hi, what brings you here? Why are you here all of a sudden? Did you find the mayor?\""
+
+    cole "\"No, but Alex and Morgan said they saw mayor Jeffery walk into some nearby farmhouse in this area last night. You remember anything like that, Amy?\""
+
+    amy "\"No. Nope, I don’t.\""
+
+    amy "\"Well, come on now let’s go. Let’s go check up on other farmhouses and maybe search for him now y’all.\""
+
+    show mar crying
+
+    cole "\"Yeah alrighty then.\""
+
+    hide mar crying
+    with easeoutleft
+    hide amy stressed at left
+    with easeoutleft
+    hide cole angry at right
+    with easeoutleft
+
+    scene bg field
+    with fade
+
+    show mar
+    with easeinright
+    show cole bored at right
+    with easeinright
+    show amy indifferent at left
+    with easeinleft
+
+    cole "\"Mayor! O’ Mayor!\""
+
+    amy "\"Come on, let’s go into the houses and search.\""
+
+    mar "\"I think I have a good idea. Let’s get sheriff Luis involved. It’ll speed things up now\""
+
+    show amy stressed at left
+
+    amy "\"Hmm no, I think we’ll be okay, let’s keep looking!\""
+
+    menu:
+        "What should we do?"
+
+        "Continue looking.":
+            jump .continueLooking
+
+        "Go see Sheriff Luis":
+            jump .meetSheriff
+
+        "Ignore both of them. Just leave":
+            jump .ignore
+    return
+
+
+label .continueLooking:
+
+    cole "\"Yeah, let’s keep looking around first.\""
+
+    mar "\"No! We can’t waste no more time! Let’s go see sheriff now!\""
+
+    menu:
+        "What should we do?"
+
+        "Continue looking.":
+            jump .continueLooking
+
+        "Go see Sheriff Luis":
+            jump .meetSheriff
+
+        "Ignore both of them. Just leave":
+            jump .ignore
+    return
+
+label .ignore:
+    $ reputation = reputation - 1
+
+    cole "\"Shut your traps! I'm sick of this. I'm not helping anymore\""
+
     return
 
 label .walkAroundTown:
 
     scene bg town
     with fade
-
 
     show cole bored at left
     with moveinleft
@@ -166,5 +329,39 @@ label .walkAroundTown:
     cole "\"Heya Jesse, we jus’ walkin’ around town and trying to see if you saw Mayor Jeffery walking around here.\""
 
     jes "\"Hmm no, now why you ask?\""
+
+    cole "\"We jus’ wondering ‘cause uh.. um... He was walking with us and he walked off.\""
+
+    jes "\"Nope, you want me to go around and look?\""
+
+    menu:
+        "Do you want Jesse to look around?"
+
+        "Say Yes":
+            call .jesseYes
+
+        "Say No":
+            call .jesseNo
+
+    if reputation < 0:
+        "Your reputation is bad."
+    else:
+        "Your reputation is fine."
+
+    jump .meetAlexAndMorgan
+
+label .jesseYes:
+
+    jes "\"Yeah yeah, I’ll come back to tell you if I see him.\""
+
+    mar "\"Oh goodness! Thank you my dear!\""
+
+    return
+
+label .jesseNo:
+
+    jes "\"Alrighty then, take care folks!\""
+
+    cole "\"Kay, let’s go see my new friends, Alex and Morgan, maybe they can help us.\""
 
     return
