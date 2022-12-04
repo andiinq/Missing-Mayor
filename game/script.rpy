@@ -300,12 +300,94 @@ label .continueLooking:
             jump .ignore
     return
 
+label .meetSheriff:
+
+    show amy stressed at left
+
+    cole "\"Alrighty, where is sheriff Luis’s office?\""
+
+    mar "\"Follow me now, it is near my home.\""
+
+    amy "\"Hey wait! How about you guys go, I- I’ll stay here! Just to keep an eye and to search more at this area! I’ll report to you if I see anything suspicious!\""
+
+    mar "\"Why thank ya dear. You are such a blessing!\""
+
+    hide mar
+    with easeoutright
+    hide cole bored at right
+    with easeoutright
+    hide amy stressed
+    with easeoutleft
+
+    scene bg sheriff
+    with fade
+
+
+    show mar at right
+    with easeinright
+    show cole
+    with easeinright
+
+    mar "\"Here we are at the sheriff's office.\""
+
+    mar "\"Ohhh Luis!\""
+
+    show sheriff at left
+    with easeinleft
+
+    luis "\"Hey hey! What’s the business here?\""
+
+    mar "\"Oh my, my husband, he was supposed to come home from his meeting last night but he has not returned!\""
+
+    mar "\"Oh I am worried oh my, where he could he be? We searchin’ everywhere but no sign!\""
+
+    luis "\"Mayor J’s missing?!\""
+
+    mar "\"Oh he has! I- I am just too sad to talk about it…\""
+
+    show m crying at right
+    show cole happy
+
+    cole "\"Good mornin’ sir, what happened was…\""
+
+    scene bg sheriff
+    with pixellate
+
+    luis "\"I see, I see. Now, Alex and Morgan said they saw him at a farm near the tavern…\""
+
+    luis "\"Ah, this be tricky my friend. A lot of stuff and animals go missing in that area. Let’s go have a talk at Alex and Morgan’s place, eh?\""
+
+    cole "\"Alrighty.\""
+
+    hide mar
+    with easeoutright
+    hide cole bored at right
+    with easeoutright
+    hide sheriff luis at left
+    with easeoutleft
+
+    show mar
+    with easeinright
+    show cole bored at right
+    with easeinright
+    show sheriff at left
+    with easeinright
+
+    luis "\"Alrighty, stay here for a bit while I go have a talk with Alex and Morgan.\""
+
+    
+
 label .ignore:
     $ reputation = reputation - 1
 
     cole "\"Shut your traps! I'm sick of this. I'm not helping anymore\""
 
-    return
+    mar "\"Cmon Cole! We're so close, please help me find my husband!\""
+
+    cole "\"Alright alright, but calm down, you're drivin' me crazy!\""
+
+    jump .continueLooking
+
 
 label .walkAroundTown:
 
