@@ -25,37 +25,37 @@ label start:
 
     n "Just on the outside of town lives and works a lonely blacksmith, Cole."
 
-    show cole happy
+    show cole
 
     cole "{i}Phew.{/i} Another day working the iron."
     cole "I guess it's a little {i}hot{/i}... haha."
     n "Distant screams can be heard in the distance."
 
-    show cole angry
+    show cole sad
 
     cole "Who on earth is disruptin' my peace and quiet on this fine afternoon?"
 
-    hide cole angry
+    hide cole sad
 
     scene bg town
     with fade
 
     n "Cole decides to venture into the town to see what's going on."
 
-    show cole bored
+    show cole
 
     cole "{i}What's going on?{/i} Everyone's runnin' around like animals!"
 
-    show cole bored at left
+    show cole at left
     with move
-    show amy stressed
+    show amy angry
 
     amy "\"HELP! HELP! THE MAYOR'S GONE MISSING!\""
     cole "\"Woaaah, calm down there, ma'am.\""
     amy "\"HOW DO YOU EXPECT ME TO STAY CALM. PEOPLE DON'T JUST DISAPPEAR.\""
     cole "\"I'm sure there's a perfectly wonderful explanation for ya ma'am.\""
 
-    show amy indifferent
+    show amy
 
     amy "*panting* \"Mayor Adams walks around town every day and asks everyone how they're doin', it just ain't like him to go missing.\""
 
@@ -63,6 +63,9 @@ label start:
         "What should I say?"
 
         "Offer to Help":
+            show cole at left
+
+            cole "\"I'll help look for 'em if it'll keep you quiet.\""
             jump .offerHelp
 
         "Tell her to stop whining.":
@@ -73,11 +76,7 @@ label start:
 
 label .offerHelp:
 
-    show cole happy at left
-
-    cole "\"I'll help look for 'em if it'll keep you quiet.\""
-
-    show amy happy
+    show amy
 
     amy "\"Oh you will! Oh me oh my! Thank the heavens for sendin' you down to me!\""
 
@@ -85,49 +84,81 @@ label .offerHelp:
 
     amy "\"We should go ask Margaret, she is my best friend and the wife of the mayor! She should have some answers!\""
 
-    hide cole happy
+    hide cole
     with moveoutright
-    hide amy happy
+    hide amy
     with moveoutright
 
     jump .meetMargaret
 
 label .stopWhining:
 
-    $ reputation = reputation - 1
-    show cole angry at left
+    $ reputation = reputation -
+    show cole sad at left
     cole "\"Would you quit your whinin'? I'm startin' to get real sick of it!\""
 
-    show amy stressed
+    show amy angry
     amy "\"You're a horrible man there, Mister Cole.\""
 
-    hide amy stressed
-    hide cole angry at left
+    amy "\"Won't you please help me find em'?\""
 
+    show cole at left
 
+    cole "\"Okay, okay, I'll help you out if you just calm down for a second there ma'am!\""
 
-    return
+    hide amy angry
+
+    jump .offerHelp
 
 label .badReputation:
 
     scene bg blacksmith
     with fade
 
-    show cole happy
+    show cole at right
+    with easeinright
 
     n "\"Cole decides to go back to his blacksmithing shop and ignore the ruckus going on within the town.\""
 
-    cole ""
+    show jeff
+    show cole sad at right
+
+    cole "{i}GASP{\i} \"What is this!?\""
+
+    show amy angry at left
+    with easeinleft
+
+    amy "\"Look y’all, our mayor is missing ‘cause of this man!\""
+
+    n "Everyone in the town gathers around to see what's going on."
+
+    show mar sad
+    with easeinleft
+
+    mar "\"HOW COULD YOU! OH MY DEAR!\""
+
+    show luis angry at left
+    with easeinleft
+
+    luis "\"Hands up you!\""
+
+    scene black
+
+    n "Cole was arrested by Sheriff Luis for the murder of Mayor Adams. It seems Cole had such a poor reputation in town that the murderer easily framed Cole."
+    n "It might be worth trying again to see if you can achieve a more satisfying ending."
+    n "Thanks for playing!"
+
+
 label .meetMargaret:
 
     scene bg margaret house
     with fade
 
-    show mar at left
+    show mar sad at left
     with easeinleft
-    show amy stressed
+    show amy
     with moveinleft
-    show cole bored at right
+    show cole at right
     with moveinleft
 
     amy "\"Oh Margaret! I heard o’ the bad news!\""
@@ -153,7 +184,6 @@ label .meetAlexAndMorgan:
     cole "\"Alex and Morgan just moved into town, they are close to me. I’ll talk to them.\""
     mar "\"Okay, I trust you now. I'll stay here with Amy.\""
 
-
     scene bg house
     with fade
 
@@ -161,9 +191,9 @@ label .meetAlexAndMorgan:
 
     show cole bored at left
     with moveinleft
-    show test
+    show alex
     with easeinright
-    show test2 at right
+    show morgan at right
     with easeinright
 
     cole "\"Howdy, have you seen Mayor Jeffery around here?\""
@@ -184,22 +214,25 @@ label .meetAlexAndMorgan:
 
     cole "\"Well, ya see, don’t panic but the mayor gone missing…\""
 
+    show alex shocked
+    show morg shocked at right
+
     morg "{i}gasping{\i} \"Uh- what now?!\""
 
     cole "\"SSHHHH!!!\""
 
     cole "\"I’m trying to find him, but you guys don’t tell anyone about this. Just be on the lookout and tell me if you see him. I’m going to go check on Amy.\""
 
+    show alex
+
     alex "\"Alrighty now, we’ll tell you if we catch him.\""
-
-
 
     scene bg margaret house
     with fade
 
-    show mar at left
+    show mar sad at left
     with easeinleft
-    show cole bored
+    show cole
     with moveinright
 
     cole "\"We’ll go check up on Amy, Alex and Morgan said Mayor Jefferey walked into her farm or some farm near her house last night.\""
@@ -225,7 +258,8 @@ label .meetAlexAndMorgan:
     n "{i}Cole loudly knocks twice on Amy's door.{\i}"
 
     n "{i}Several loud noises arise from inside the farmhouse{\i}"
-    show amy stressed at left
+
+    show amy angry at left
     with easeinleft
 
     amy "\"Oh- oh hi, what brings you here? Why are you here all of a sudden? Did you find the mayor?\""
@@ -236,13 +270,13 @@ label .meetAlexAndMorgan:
 
     amy "\"Well, come on now let’s go. Let’s go check up on other farmhouses and maybe search for him now y’all.\""
 
-    show mar crying
+    show mar sad
 
     cole "\"Yeah alrighty then.\""
 
-    hide mar crying
+    hide mar sad
     with easeoutleft
-    hide amy stressed at left
+    hide amy angry at left
     with easeoutleft
     hide cole angry at right
     with easeoutleft
@@ -252,9 +286,9 @@ label .meetAlexAndMorgan:
 
     show mar
     with easeinright
-    show cole bored at right
+    show cole at right
     with easeinright
-    show amy indifferent at left
+    show amy at left
     with easeinleft
 
     cole "\"Mayor! O’ Mayor!\""
@@ -263,7 +297,7 @@ label .meetAlexAndMorgan:
 
     mar "\"I think I have a good idea. Let’s get sheriff Luis involved. It’ll speed things up now\""
 
-    show amy stressed at left
+    show amy angry at left
 
     amy "\"Hmm no, I think we’ll be okay, let’s keep looking!\""
 
@@ -302,7 +336,7 @@ label .continueLooking:
 
 label .meetSheriff:
 
-    show amy stressed at left
+    show amy angry at left
 
     cole "\"Alrighty, where is sheriff Luis’s office?\""
 
@@ -345,8 +379,8 @@ label .meetSheriff:
 
     mar "\"Oh he has! I- I am just too sad to talk about it…\""
 
-    show m crying at right
-    show cole happy
+    show mar sad at right
+    show cole
 
     cole "\"Good mornin’ sir, what happened was…\""
 
@@ -359,23 +393,85 @@ label .meetSheriff:
 
     cole "\"Alrighty.\""
 
-    hide mar
+    hide mar sad
     with easeoutright
-    hide cole bored at right
+    hide cole at right
     with easeoutright
-    hide sheriff luis at left
+    hide luis at left
     with easeoutleft
 
     show mar
     with easeinright
-    show cole bored at right
+    show cole at right
     with easeinright
-    show sheriff at left
+    show luis at left
     with easeinright
 
     luis "\"Alrighty, stay here for a bit while I go have a talk with Alex and Morgan.\""
 
-    
+    hide luis at left
+    with easeoutleft
+
+    scene bg sheriff
+    with pixellate
+
+    show luis at left
+    with easeinright
+
+    luis "\"Alrighty then, we got some clues in our hands folks. But let me ask you this, did you happen to see if Amy might have some clues?\""
+
+    cole "\"Hmm, we visited her house earlier today and she found nothing.\""
+
+    luis "\"Let me go there then.\""
+
+    hide mar
+    with easeoutright
+    hide cole bored at right
+    with easeoutright
+    hide luis at left
+    with easeoutleft
+
+    scene bg amy farm
+    with fade
+
+    show cole bored at right
+    with easeinright
+    show luis
+    with easeinright
+    show amy at left
+    with easeinleft
+
+    cole "\"Mornin’ Amy, you mind if I take a look inside your house real quick? I just want to make sure and double check everythin’ is good.\""
+
+    show amy angry
+
+    amy "\"Uh well I mean sure, but really I told them there is nothing.\""
+
+    hide luis
+    with easeoutright
+
+    show mar at left
+    with easeinright
+
+    amy "\"I don’t know why he is taking so long, but also I found nothing. Maybe Mayor Jefferey is somewhere else and not even in town.\""
+
+    cole "{i}Hmm she sounds really suspicious right now, could she be…?{\i}"
+
+    mar "\"No, I know my dear, he would never leave me like that!\""
+
+    show mar sad
+
+    hide cole
+    with easeoutright
+
+    show luis
+    with easeinright
+
+    luis "\"Yeah, everythin’ is good, sorry Amy I just wanted to make sure, ya know?\""
+
+    amy "\"I told you, I am just very worried about our mayor, but I don’t think he is in this area.\""
+
+    return
 
 label .ignore:
     $ reputation = reputation - 1
@@ -394,7 +490,7 @@ label .walkAroundTown:
     scene bg town
     with fade
 
-    show cole bored at left
+    show cole at left
     with moveinleft
     show mar
     with moveinleft
@@ -405,11 +501,13 @@ label .walkAroundTown:
 
     cole "\"Good idea.\""
 
-    show jesse at right
+    show jes at right
     with moveinright
 
     cole "\"Heya Jesse, we jus’ walkin’ around town and trying to see if you saw Mayor Jeffery walking around here.\""
 
+    show jes shocked at right
+    
     jes "\"Hmm no, now why you ask?\""
 
     cole "\"We jus’ wondering ‘cause uh.. um... He was walking with us and he walked off.\""
