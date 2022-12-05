@@ -3,7 +3,6 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define jeff = Character("Jeffery Adams", color="f44336")
 define mar = Character('Margaret Adams', color="#ff71b6")
 define cole = Character('Cole (You)', color="#da7a7a")
 define luis = Character('Sherrif Luis', color="#ff9f3b")
@@ -14,8 +13,6 @@ define morg = Character('Morgan', color= "bcd5ed")
 define jes = Character("Jesse", color="c49f35")
 
 default reputation = 0
-
-# The game starts here.
 
 label start:
 
@@ -109,45 +106,6 @@ label .stopWhining:
     hide amy angry
 
     jump .offerHelp
-
-label .badReputation:
-
-    scene bg blacksmith
-    with fade
-
-    show cole at right
-    with easeinright
-
-    n "\"Cole decides to go back to his blacksmithing shop and ignore the ruckus going on within the town.\""
-
-    show jeff
-    show cole sad at right
-
-    cole "{i}GASP{\i} \"What is this!?\""
-
-    show amy angry at left
-    with easeinleft
-
-    amy "\"Look y’all, our mayor is missing ‘cause of this man!\""
-
-    n "Everyone in the town gathers around to see what's going on."
-
-    show mar sad
-    with easeinleft
-
-    mar "\"HOW COULD YOU! OH MY DEAR!\""
-
-    show luis angry at left
-    with easeinleft
-
-    luis "\"Hands up you!\""
-
-    scene black
-
-    n "Cole was arrested by Sheriff Luis for the murder of Mayor Adams. It seems Cole had such a poor reputation in town that the murderer easily framed Cole."
-    n "It might be worth trying again to see if you can achieve a more satisfying ending."
-    n "Thanks for playing!"
-
 
 label .meetMargaret:
 
@@ -470,7 +428,150 @@ label .meetSheriff:
 
     amy "\"I told you, I am just very worried about our mayor, but I don’t think he is in this area.\""
 
+    luis "\"Let’s continue to search this area.\""
+
+    menu:
+        "What should we do?"
+
+        "Search Amy's farmhouse":
+            jump .searchFarmhouse
+
+        "Search the nearby tavern":
+            jump .searchTavern
+
+        "Stop helping.":
+            jump .stopHelping
+
     return
+
+label .searchFarmhouse:
+    scene bg farmhouse inside
+    with fade
+
+    show cole at right
+    with easeinright
+    show luis
+    with easeinright
+
+    luis "\"Hmmm nothing seems interesting here.\""
+
+    cole "\"Yeah, everything seem fine to me.\""
+
+    luis "\"Maybe we should search the tavern instead?\""
+
+    cole "\"Sounds good\""
+
+    hide cole
+    with easeoutright
+    hide luis
+    with easeoutright
+
+    jump .searchTavern
+
+label .searchTavern:
+
+    cole "\"How ‘bout we go searching in the tavern?\""
+
+    scene bg tavern
+    with fade
+
+    show cole
+    with easeinleft
+    show luis at left
+    with easeinleft
+
+    luis "\"Hmmm now why is there such a bad smell… like rotten fish?\""
+
+    n "Screams can be heard in the distance."
+
+    show cole sad
+
+    cole "\"What’s that?!\""
+
+    hide cole
+    with easeoutleft
+    hide luis
+    with easeoutleft
+
+    scene bg town
+    with fade
+
+    show cole
+    with easeinright
+    show luis at right
+    with easeinright
+    show amy at left
+    with easeinleft
+
+    amy "\"Me cow! Me cow is dead in my farmhouse! Now I got no more milk for my house!\""
+
+    cole "\"Hmm, what happened though?\""
+
+    amy "\"Oh who knows what, but me cow is dead! We must find out who killed my cow!\""
+
+    luis "\"Alrighty alrighty, but we need to solve this mayor case folks! Now… where was I?\""
+
+    cole "\"Back to the tavern, sir.\""
+
+    amy "\"Noooo!! Please go to my farmhouse!! We need to find out who taken the life of me cow!\""
+
+    menu:
+        "Will you go to her farmhouse?"
+
+        "Yes":
+            cole "\"Okay we will.\""
+
+            luis "\"No, we must finish our task first ‘mate.\""
+
+            show amy angry at left
+
+            amy "\"Wai- wait!\""
+
+            jump .noFarmhouse
+
+        "No":
+            cole "\"We'll deal with that later Amy, sorry.\""
+
+            show amy angry at left
+
+            jump .noFarmhouse
+
+    return
+
+label .noFarmhouse:
+
+    hide cole
+    with easeoutright
+    hide luis at right
+    with easeoutright
+    hide amy at left
+    with easeoutleft
+
+    scene bg tavern
+    with fade
+
+    cole "\"...\""
+
+    return
+
+label .stopHelping:
+    $ reputation = reputation - 1
+
+    cole "\"I ain't helpin' y'all anymore! I'm done with this!\""
+
+    luis "\"Aww cmon please Cole, we're so close to figurin' it all out!\""
+
+    cole "\"Fine, but I best be getting paid for this.\""
+
+    menu:
+        "Where should we search?"
+
+        "Search the tavern.":
+            jump .searchTavern
+
+        "Search the farmhouse.":
+            jump .searchFarmhouse
+
 
 label .ignore:
     $ reputation = reputation - 1
@@ -522,10 +623,6 @@ label .walkAroundTown:
         "Say No":
             call .jesseNo
 
-    if reputation < 0:
-        "Your reputation is bad."
-    else:
-        "Your reputation is fine."
 
     jump .meetAlexAndMorgan
 
@@ -542,5 +639,55 @@ label .jesseNo:
     jes "\"Alrighty then, take care folks!\""
 
     cole "\"Kay, let’s go see my new friends, Alex and Morgan, maybe they can help us.\""
+
+    return
+
+label .ending:
+    if reputation < 0:
+
+        jump .badEnding
+
+    else:
+        "Your reputation is fine."
+
+
+label .badEnding:
+
+    scene bg blacksmith
+    with fade
+
+    show jeff
+    show cole sad at right
+    with easeinright
+
+    n "Cole decides to go back home after spending a long day dealing with difficult people."
+
+    cole "{i}GASP{\i} \"What is this?!\""
+
+    show amy angry at left
+    with easeinleft
+
+    amy "\"Look y'all, our mayor is missing because of this here terrible man!\""
+
+    n "Everyone gathers around Cole's blacksmithing shop to see what all the ruckus is about."
+
+    hide amy
+    with easeoutright
+    show mar sad
+    with easeinright
+
+    mar "\"HOW COULD YOU! OH MY DEAR!\""
+
+    hide jeff
+    show luis
+    with easeinleft
+
+    luis "\"Hands up you!\""
+
+    scene black
+
+    n "Cole was arrested by Sheriff Luis for the murder of Mayor Adams. It seems Cole had such a poor reputation in town that the murderer easily framed Cole."
+    n "It might be worth trying again to see if you can achieve a more satisfying ending."
+    n "Thanks for playing!"
 
     return
