@@ -1,7 +1,3 @@
-# The script of the game goes in this file.
-
-# Declare characters used by this game. The color argument colorizes the
-# name of the character.
 
 define mar = Character('Margaret Adams', color="#ff71b6")
 define cole = Character('Cole (You)', color="#da7a7a")
@@ -527,30 +523,14 @@ label .searchTavern:
 
             amy "\"Wai- wait!\""
 
-            jump .noFarmhouse
+            jump .ending
 
         "No":
             cole "\"We'll deal with that later Amy, sorry.\""
 
             show amy angry at left
 
-            jump .noFarmhouse
-
-    return
-
-label .noFarmhouse:
-
-    hide cole
-    with easeoutright
-    hide luis at right
-    with easeoutright
-    hide amy at left
-    with easeoutleft
-
-    scene bg tavern
-    with fade
-
-    cole "\"...\""
+            jump .ending
 
     return
 
@@ -643,15 +623,101 @@ label .jesseNo:
     return
 
 label .ending:
-    if reputation < 0:
-
+    if reputation < 2:
         jump .badEnding
 
     else:
-        "Your reputation is fine."
+        jump .goodEnding
 
+label .goodEnding:
+
+    hide cole
+    with easeoutright
+    hide luis at right
+    with easeoutright
+    hide amy at left
+    with easeoutleft
+
+    scene bg tavern
+    with fade
+
+    show cole
+    with easeinleft
+    show luis at left
+    with easeinleft
+
+    luis "\"Now, the smell be comin’ from underneath the tavern.\""
+
+    cole "\"Huh?\""
+
+    luis "\"Ain’t no mistake about it, I’ve been on duty for decades and I know what I smell.\""
+
+    hide cole
+    with easeoutright
+    hide luis
+    with easeoutright
+
+    scene bg cellar
+    with fade
+
+    show jeff at right
+
+    show cole shocked
+    with easeinleft
+    show luis at left
+    with easeinleft
+
+    cole "\"OH GOODNESS! MA-MAYOR?!\""
+
+    luis "\"MAYOR!\""
+
+    luis "\"Look like he got drunked… the smell of alcohol pretty strong.\""
+
+    cole "\"But who could have..?!\""
+
+    hide cole
+    with easeoutleft
+    show amy angry
+    with easeinleft
+
+    amy "\"Fine! I did… I was the one who did this dirty.\""
+
+    luis "\"But why now?\""
+
+    amy "\"‘Cause I been in this town my whole life and all I got is a farmhouse!\""
+
+    amy "\"I ran for mayor position, so I could change this town but lost to that old geezer everytime. He even made a fool out of me!\""
+
+    amy "\"I thought I get rid of him for what he done to me!\""
+
+    luis "\"Well, you little…\""
+
+    hide amy
+    with easeoutleft
+
+    amy "{i}Laughing in the distance{\i} \"HAHAHAHA\""
+
+    n "Cole and Luis can hear the door to the cellar lock as Amy leaves\""
+
+    scene black
+    with fade
+
+    n "TO BE CONTINUED: Thank you for playing.\""
+
+    return
 
 label .badEnding:
+
+    cole "\"You know what? I'm not helping anymore. This is dumb.\""
+
+    luis "\"I can't believe you... you... you loser!\""
+
+    hide cole
+    with easeoutleft
+    hide luis
+    with easeoutright
+    hide amy
+    with easeoutright
 
     scene bg blacksmith
     with fade
@@ -685,6 +751,7 @@ label .badEnding:
     luis "\"Hands up you!\""
 
     scene black
+    with fade
 
     n "Cole was arrested by Sheriff Luis for the murder of Mayor Adams. It seems Cole had such a poor reputation in town that the murderer easily framed Cole."
     n "It might be worth trying again to see if you can achieve a more satisfying ending."
