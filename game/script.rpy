@@ -623,7 +623,7 @@ label .jesseNo:
     return
 
 label .ending:
-    if reputation < 2:
+    if reputation < -2:
         jump .badEnding
 
     else:
@@ -662,7 +662,7 @@ label .goodEnding:
 
     show jeff at right
 
-    show cole shocked
+    show cole sad
     with easeinleft
     show luis at left
     with easeinleft
@@ -694,10 +694,12 @@ label .goodEnding:
 
     hide amy
     with easeoutleft
+    show cole
+    with easeinleft
 
     amy "{i}Laughing in the distance{\i} \"HAHAHAHA\""
 
-    n "Cole and Luis can hear the door to the cellar lock as Amy leaves\""
+    n "Cole and Luis can hear the door to the cellar lock as Amy leaves."
 
     scene black
     with fade
@@ -739,7 +741,7 @@ label .badEnding:
 
     hide amy
     with easeoutright
-    show mar sad
+    show mar sad at left
     with easeinright
 
     mar "\"HOW COULD YOU! OH MY DEAR!\""
