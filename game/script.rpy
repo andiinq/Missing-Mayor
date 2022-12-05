@@ -93,7 +93,7 @@ label .offerHelp:
 
 label .stopWhining:
 
-    $ reputation = reputation -
+    $ reputation = reputation - 1
     show cole sad at left
     cole "\"Would you quit your whinin'? I'm startin' to get real sick of it!\""
 
@@ -189,11 +189,11 @@ label .meetAlexAndMorgan:
 
     n "Cole walks to Alex and Morgan's house."
 
-    show cole bored at left
+    show cole at left
     with moveinleft
     show alex
     with easeinright
-    show morgan at right
+    show morg at right
     with easeinright
 
     cole "\"Howdy, have you seen Mayor Jeffery around here?\""
@@ -248,7 +248,7 @@ label .meetAlexAndMorgan:
     with fade
     show mar
     with moveinright
-    show cole angry at right
+    show cole sad at right
     with moveinright
 
     cole "\"Her house is always so quiet for some’ reason now.\""
@@ -350,7 +350,7 @@ label .meetSheriff:
     with easeoutright
     hide cole bored at right
     with easeoutright
-    hide amy stressed
+    hide amy
     with easeoutleft
 
     scene bg sheriff
@@ -366,10 +366,12 @@ label .meetSheriff:
 
     mar "\"Ohhh Luis!\""
 
-    show sheriff at left
+    show luis at left
     with easeinleft
 
     luis "\"Hey hey! What’s the business here?\""
+
+    show mar sad at right
 
     mar "\"Oh my, my husband, he was supposed to come home from his meeting last night but he has not returned!\""
 
@@ -379,7 +381,7 @@ label .meetSheriff:
 
     mar "\"Oh he has! I- I am just too sad to talk about it…\""
 
-    show mar sad at right
+
     show cole
 
     cole "\"Good mornin’ sir, what happened was…\""
@@ -387,25 +389,17 @@ label .meetSheriff:
     scene bg sheriff
     with pixellate
 
+    n "Cole spends the next few minutes discussing with Sheriff Luis about everything going on."
+
+    show mar at right
+    show cole
+    show luis at left
+
     luis "\"I see, I see. Now, Alex and Morgan said they saw him at a farm near the tavern…\""
 
     luis "\"Ah, this be tricky my friend. A lot of stuff and animals go missing in that area. Let’s go have a talk at Alex and Morgan’s place, eh?\""
 
     cole "\"Alrighty.\""
-
-    hide mar sad
-    with easeoutright
-    hide cole at right
-    with easeoutright
-    hide luis at left
-    with easeoutleft
-
-    show mar
-    with easeinright
-    show cole at right
-    with easeinright
-    show luis at left
-    with easeinright
 
     luis "\"Alrighty, stay here for a bit while I go have a talk with Alex and Morgan.\""
 
@@ -415,8 +409,13 @@ label .meetSheriff:
     scene bg sheriff
     with pixellate
 
+    show cole
+    show mar at right
+
+    pause 1.0
+
     show luis at left
-    with easeinright
+    with easeinleft
 
     luis "\"Alrighty then, we got some clues in our hands folks. But let me ask you this, did you happen to see if Amy might have some clues?\""
 
@@ -429,12 +428,12 @@ label .meetSheriff:
     hide cole bored at right
     with easeoutright
     hide luis at left
-    with easeoutleft
+    with easeoutright
 
     scene bg amy farm
     with fade
 
-    show cole bored at right
+    show cole at right
     with easeinright
     show luis
     with easeinright
@@ -450,7 +449,7 @@ label .meetSheriff:
     hide luis
     with easeoutright
 
-    show mar at left
+    show mar
     with easeinright
 
     amy "\"I don’t know why he is taking so long, but also I found nothing. Maybe Mayor Jefferey is somewhere else and not even in town.\""
@@ -464,7 +463,7 @@ label .meetSheriff:
     hide cole
     with easeoutright
 
-    show luis
+    show luis at right
     with easeinright
 
     luis "\"Yeah, everythin’ is good, sorry Amy I just wanted to make sure, ya know?\""
@@ -507,7 +506,7 @@ label .walkAroundTown:
     cole "\"Heya Jesse, we jus’ walkin’ around town and trying to see if you saw Mayor Jeffery walking around here.\""
 
     show jes shocked at right
-    
+
     jes "\"Hmm no, now why you ask?\""
 
     cole "\"We jus’ wondering ‘cause uh.. um... He was walking with us and he walked off.\""
